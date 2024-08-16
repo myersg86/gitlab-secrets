@@ -14,7 +14,7 @@ def commit_print(project:str, repository:str , commits: set[str]):
         print(f"{gitlab_instance_url}/{project}/{repository}/-/commit/{commit}")
 
 def get_repository_id_from_name(project:str, repository:str) -> int:
-    url = f"{gitlab_instance_url}/api/v4/projects/{project}%2f{repository}?simple=true"
+    url = f"{gitlab_instance_url}/api/v4/projects/{project.replace('/','%2F')}%2f{repository}?simple=true"
     data = requests.get(url, headers=request_headers)
     datajson = data.json()
     id = datajson['id']
